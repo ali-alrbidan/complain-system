@@ -43,8 +43,7 @@
 
 // export default AdminHeader;
 
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 const AdminHeader = () => {
   const tabs = [
@@ -59,7 +58,8 @@ const AdminHeader = () => {
     "backup",
   ];
 
-  const [currentTab, setCurrentTab] = useState("overview");
+  const location = useLocation();
+  const currentTab = location.pathname.split("/").pop() || "overview";
 
   return (
     <div className="bg-green-50/50 px-3 md:px-6 py-3 md:py-4">
@@ -68,7 +68,6 @@ const AdminHeader = () => {
           <NavLink
             to={`/admin-dashboard/${tab}`}
             key={tab}
-            onClick={() => setCurrentTab(tab)}
             className={`px-3 py-1.5 md:px-6 md:py-2 rounded-full text-xs md:text-sm font-medium whitespace-nowrap transition-colors flex-shrink-0 ${
               currentTab === tab
                 ? "bg-emerald-600 text-white"

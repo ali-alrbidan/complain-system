@@ -78,7 +78,7 @@ import { Outlet } from "react-router-dom";
 import AdminHeader from "../adminHeader/AdminHeader";
 
 const AdminLayout = () => {
-  const [searchValue, setSearchValue] = useState("largeoffice Main Street");
+  const [searchValue, setSearchValue] = useState("");
   const [isSearchExpanded, setIsSearchExpanded] = useState(false);
 
   return (

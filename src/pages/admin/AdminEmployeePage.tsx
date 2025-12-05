@@ -51,8 +51,8 @@ const AdminEmployeePage = () => {
   };
 
   return (
-    <div className=" bg-gray-50">
-      <div className="max-w-7xl mx-auto">
+    <div className=" ">
+      <div className="  bg-white rounded-xl sm:mx-16 p-2 py-3 sm:p-12 sm:py-5">
         {/* Header */}
         <div className="mb-8">
           <div className="flex md:items-center justify-between max-md:flex-col max-md:gap-4 max-md:px-2">
