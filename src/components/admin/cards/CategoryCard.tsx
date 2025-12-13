@@ -1,6 +1,6 @@
 import { Edit } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
+import { Button } from "../../ui/button";
+import { Card } from "../../ui/card";
 
 const CategoryCard = ({
   name,

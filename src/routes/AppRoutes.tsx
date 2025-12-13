@@ -1,5 +1,5 @@
 // routes/AppRoutes.tsx
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import AdminLoginPage from "../pages/admin/AdminLoginPage";
 
 import AdminLayout from "../components/layout/adminLayout/AdminLayout";
@@ -17,17 +17,28 @@ import AdminLogsPage from "../pages/admin/AdminLogsPage";
 import AdminSecurityPage from "../pages/admin/AdminSecurityPage";
 import AdminPerformancePage from "../pages/admin/AdminPerformancePage";
 import AdminBackupPage from "../pages/admin/AdminBackupPage";
+import { useAuthAdminStore } from "../app/store/adminAuth.store";
 
 function AppRoutes() {
+  //@ts-ignore
+  const { authAdmin } = useAuthAdminStore();
+
   return (
     <Routes>
       <Route path="/" element={<IntroPage />} />
       <Route path="*" element={<PageNotFound />} />
 
-      {/* admin routes */}
-      <Route path="/admin-login" element={<AdminLoginPage />} />
+      <Route
+        path="/admin-login"
+        element={
+          !authAdmin ? <AdminLoginPage /> : <Navigate to={"/admin-dashboard"} />
+        }
+      />
 
-      <Route path="/admin-dashboard" element={<AdminLayout />}>
+      <Route
+        path="/admin-dashboard"
+        element={authAdmin ? <AdminLayout /> : <Navigate to={"/admin-login"} />}
+      >
         <Route index element={<AdminOverviewPage />} />
         <Route path="overview" element={<AdminOverviewPage />} />
         <Route path="analytics" element={<AdminAnalyticsPage />} />
@@ -40,7 +51,6 @@ function AppRoutes() {
         <Route path="backup" element={<AdminBackupPage />} />
       </Route>
 
-      {/* employee routes routes */}
       <Route path="/employee-login" element={<EmployeeLoginPage />} />
       <Route path="/employee-dashboard" element={<EmployeeDashboard />} />
     </Routes>

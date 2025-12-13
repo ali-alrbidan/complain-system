@@ -1,6 +1,6 @@
 import { Building2 } from "lucide-react";
 import { Button } from "../../components/ui/button";
-import DepartmentCard from "../../components/cards/DepartmentCard";
+import DepartmentCard from "../../components/admin/cards/DepartmentCard";
 
 const AdminDepartmentPage = () => {
   const departments = [

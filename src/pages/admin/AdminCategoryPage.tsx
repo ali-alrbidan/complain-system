@@ -1,5 +1,5 @@
 import { Plus } from "lucide-react";
-import CategoryCard from "../../components/cards/CategoryCard";
+import CategoryCard from "../../components/admin/cards/CategoryCard";
 import { Button } from "../../components/ui/button";
 
 const AdminCategoryPage = () => {

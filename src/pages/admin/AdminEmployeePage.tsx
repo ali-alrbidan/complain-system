@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { Card } from "../../components/ui/card";
+import AddEmployeeForm from "../../components/admin/forms/AddEmployeeForm";
 const AdminEmployeePage = () => {
   //@ts-ignore
   const [employees, setEmployees] = useState([
@@ -44,6 +45,7 @@ const AdminEmployeePage = () => {
     },
   ]);
 
+  const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
   const getStatusColor = (status: string) => {
     return status === "Verified"
       ? "bg-green-100 text-green-700 hover:bg-green-100"
@@ -69,7 +71,10 @@ const AdminEmployeePage = () => {
                 <Download className="w-4 h-4" />
                 <p className="max-md:text-xs">Export Data</p>
               </Button>
-              <Button className="gap-2 bg-green-600 hover:bg-green-700">
+              <Button
+                className="gap-2 bg-green-600 hover:bg-green-700"
+                onClick={() => setIsAddDialogOpen(true)}
+              >
                 <Plus className="w-4 h-4" />
 
                 <p className="max-md:text-xs"> Add Employee</p>
@@ -145,6 +150,10 @@ const AdminEmployeePage = () => {
           ))}
         </div>
       </div>
+      <AddEmployeeForm
+        open={isAddDialogOpen}
+        onOpenChange={setIsAddDialogOpen}
+      />
     </div>
   );
 };

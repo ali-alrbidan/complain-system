@@ -1,7 +1,8 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { LoaderIcon } from "react-hot-toast";
 import * as z from "zod";
+import { useAuthAdminStore } from "../../app/store/adminAuth.store";
 import Footer from "../../components/Footer";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
@@ -30,15 +31,13 @@ export default function AdminLoginPage() {
     },
   });
 
-  const navigate = useNavigate();
+  //@ts-ignore
+  const { signIn, isSigningIn, authAdmin } = useAuthAdminStore();
 
-  async function onSubmit(values: { email: string; password: string }) {
-    try {
-      navigate("/admin-dashboard/");
-      console.log("Login submitted", { values });
-    } catch (error) {
-      console.log(error);
-    }
+  console.log(authAdmin);
+
+  function onSubmit(values: { email: string; password: string }) {
+    signIn(values);
   }
 
   return (
@@ -106,9 +105,14 @@ export default function AdminLoginPage() {
                   />
                   <Button
                     type="submit"
+                    disabled={isSigningIn}
                     className="w-full bg-primary hover:bg-hover text-white font-medium py-5 text-base"
                   >
-                    Sign In
+                    {isSigningIn ? (
+                      <LoaderIcon className="w-full h-5 animate-spin text-center" />
+                    ) : (
+                      "Sign In"
+                    )}
                   </Button>
                 </form>
               </Form>
